@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tech Blog - Latest Articles
+{% endblock %}
+
+{% block body %}
+	<div class="hero">
+		<h1>Tech Blog</h1>
+		<p class="subtitle">Discover the latest insights in technology and development</p>
+	</div>
+
+	<div class="posts">
+		{% for post in posts %}
+			<article class="post">
+				<h2>{{ post.title }}</h2>
+				<p>{{ post.description|slice(0, 150) }}...</p>
+				<a href="{{ path('app_post_show', {'id': post.id}) }}">Read more</a>
+			</article>
+		{% else %}
+			<div class="no-posts">
+				<p>No posts found. Check back soon for new content!</p>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

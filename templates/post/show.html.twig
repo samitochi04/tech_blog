@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ post.title }}
+{% endblock %}
+
+{% block body %}
+	<div class="post-detail">
+		<h1>{{ post.title }}</h1>
+		<div class="post-content">
+			{{ post.description }}
+		</div>
+
+		<div class="comments-section">
+			<h2>Comments</h2>
+			{% if post.comments is not empty %}
+				{% for comment in post.comments %}
+					<div class="comment">
+						<strong>{{ comment.username }}</strong>
+						<p>{{ comment.content }}</p>
+						<small>{{ comment.createdAt|date('Y-m-d H:i:s') }}</small>
+					</div>
+				{% endfor %}
+			{% else %}
+				<p>No comments yet.</p>
+			{% endif %}
+		</div>
+
+		<div class="comment-form">
+			<h3>Add a comment</h3>
+			{{ form_start(CommentForm) }}
+			{{ form_row(CommentForm.username) }}
+			{{ form_row(CommentForm.content) }}
+			<button type="submit" class="btn">Submit Comment</button>
+			{{ form_end(CommentForm) }}
+		</div>
+	</div>
+{% endblock %}

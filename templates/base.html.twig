@@ -1,17 +1,66 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet"> {% block stylesheets %}{% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-</html>
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
+	</head>
+	<style>
+		.navbar {
+			justify-content: center;
+			display: flex;
+		}
+		.navbar li {
+			list-style: none;
+			margin: 0 10px;
+		}
+
+		.footer {
+			text-align: center;
+			padding: 20px;
+			position: fixed;
+			width: 100%;
+			bottom: 0;
+		}
+	</style>
+	<body>
+		<header>
+			<nav>
+				<ul class="navbar">
+					<li class="brand">
+						<a href="{{ path('app_home') }}">Tech Blog</a>
+					</li>
+					<li>
+						<a href="{{ path('app_home') }}">Home</a>
+					</li>
+					<li>
+						<a href="{{ path('app_about') }}">About</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+
+		<main class="container"> {% block body %}{% endblock %}
+			</main>
+
+			<footer class="footer">
+				<div class="footer-content">
+					<p>&copy;
+						{{ "now"|date("Y") }}
+						Tech Blog - All rights reserved</p>
+				</div>
+			</footer>
+		</body>
+	</html>
